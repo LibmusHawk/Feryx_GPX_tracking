@@ -1,0 +1,49 @@
+{
+  "name": "feryx",
+  "version": "1.0.0",
+  "main": "src/js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "build": {
+    "productName": "Feryx",
+    "icon": "src/images/feryx_logo_v2",
+    "icons": {
+      "icon": "src/images/icons/icon.png",
+      "icons": {
+        "linux": ["src/images/icons/feryx_logo_v3.png"],
+        "win": ["src/images/icons/feryx_logo_v3.ico"],
+        "mac": ["src/images/icons/feryx_logo_v2.icns"]
+      }
+    }
+  },
+  "keywords": [],
+  "author": "Linus",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "A gpx tracker app",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/maker-rpm": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0",
+    "@electron-forge/maker-zip": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "33.3.1"
+  },
+  "dependencies": {
+    "@mapbox/togeojson": "^0.16.2",
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^11.7.2",
+    "chart.js": "^4.4.7",
+    "electron-squirrel-startup": "^1.0.1",
+    "leaflet": "^1.9.4",
+    "nouislider": "^15.8.1",
+    "sqlite3": "^5.1.7"
+  }
+}

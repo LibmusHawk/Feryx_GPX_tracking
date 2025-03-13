@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feryx</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <!--Animation-->
+  <div class="animation-container">
+    <div class="logo-wrapper hidden">
+      <img src="../images/icons/feryx_logo_v3.png" alt="Logo" class="logo">
+    </div>
+    <div class="title-wrapper hidden">
+      <h1>Feryx</h1>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main-content hidden">
+    <div class="login-container">
+      <img src="../images/icons/feryx_logo_v3.png" alt="Logo" class="logo">
+      <div class="title">Feryx</div>
+        <form id="loginForm">
+          <input type="text" id="username" placeholder="Username" required>
+          <input type="password" id="password" placeholder="Password" required>
+          <button type="submit">Login</button>
+        </form>
+      <div class="register-link">
+        Don't have an account? <a href="./register.html">Register here</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get DOM elements
+  document.addEventListener('DOMContentLoaded', () => {
+    const logoWrapper = document.querySelector('.logo-wrapper');
+    const titleWrapper = document.querySelector('.title-wrapper');
+    const animationContainer = document.querySelector('.animation-container');
+    const mainContent = document.querySelector('.main-content');
+
+    const skipAnimation = () => {
+      // Hide animation immediately and fade in main content
+      animationContainer.classList.add('fade-out');
+      setTimeout(() => {
+        animationContainer.style.display = 'none';
+        mainContent.classList.add('fade-in');
+      }, 1000);
+      document.removeEventListener('click', skipAnimation);
+    };
+
+    if (logoWrapper && titleWrapper && animationContainer && mainContent) {
+      // Show logo
+      setTimeout(() => {
+        logoWrapper.classList.remove('hidden');
+      }, 100);
+
+      // Show title
+      setTimeout(() => {
+        titleWrapper.classList.remove('hidden');
+      }, 2100);
+
+      // Automatically transition to main content after animation
+      setTimeout(() => {
+        animationContainer.classList.add('fade-out');
+        setTimeout(() => {
+          animationContainer.style.display = 'none';
+          mainContent.classList.add('fade-in');
+        }, 1000);
+      }, 4000);
+    }
+
+    // Skip Animation
+    document.addEventListener('click', skipAnimation);
+  });
+
+
+    // Login
+  document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Get form values
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Attempt login
+    const response = await window.api.login(username, password);
+
+    if (response.success) {
+      // Success
+      await window.api.showDialog({
+        type: 'info',
+        title: 'Login Successful',
+        message: 'Welcome to the application!',
+      });
+      window.location.href = './index.html';
+    } else {
+      //Error
+      await window.api.showDialog({
+        type: 'error',
+        title: 'Login Failed',
+        message: 'Invalid username or password.',
+      });
+    }
+  });
+  </script>
+
+  <script src="../js/preload.js"></script>
+</body>
+</html>

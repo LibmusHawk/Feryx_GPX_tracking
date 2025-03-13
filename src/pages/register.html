@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feryx</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <div class="register-container">
+    <img src="../images/icons/feryx_logo_v3.png" alt="Logo" class="logo">
+    <div class="title">Create an Account</div>
+    <form id="registerForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit">Register</button>
+    </form>
+    <div class="login-link">
+      Already have an account? <a href="./login.html">Login here</a>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+  
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+  
+      if (password !== confirmPassword) {
+        await window.api.showDialog({
+          type: 'error',
+          title: 'Password Mismatch',
+          message: 'The passwords do not match. Please try again.',
+        });
+        return;
+      }
+  
+      const response = await window.api.register(username, password);
+  
+      if (response.success) {
+        await window.api.showDialog({
+          type: 'info',
+          title: 'Registration Successful',
+          message: 'Your account has been created successfully!',
+        });
+        window.location.href = './login.html';
+      } else {
+        await window.api.showDialog({
+          type: 'error',
+          title: 'Registration Failed',
+          message: response.message || 'An error occurred during registration.',
+        });
+      }
+    });
+  </script>
+  
+</body>
+</html>
