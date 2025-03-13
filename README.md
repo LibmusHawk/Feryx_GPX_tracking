@@ -49,7 +49,7 @@ The **Settings** section allows you to customize your experience:
 
 - **Use Miles**: Toggle between kilometers and miles for distance measurements.
 - **3D Map**: Enable or disable the 3D map view.
-- **Convert GPX to EVL**: Convert GPX files to EVL format using the "Convert" button.
+- **Convert GPX to KML**: Convert GPX files to KML format using the "Convert" button.
 
 ## Releases and Installation
 
