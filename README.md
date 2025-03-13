@@ -1,4 +1,4 @@
-# GitHub User Guide for Feryx
+# User Guide for Feryx
 
 Welcome to the GitHub user guide for **Feryx**, a GPX viewer Electron application. This guide will walk you through the key features of the application, including the login page, registration page, and the main GPX viewing interface. Additionally, we'll cover how to access the installer from the GitHub releases page and how to get into the source code.
 
