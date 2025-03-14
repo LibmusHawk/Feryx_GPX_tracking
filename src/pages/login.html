@@ -87,6 +87,7 @@
 
     // Attempt login
     const response = await window.api.login(username, password);
+    console.log("Login response:", response);
 
     if (response.success) {
       // Success

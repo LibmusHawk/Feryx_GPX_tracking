@@ -6,23 +6,34 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "build": "electron-builder"
   },
   "build": {
-    "productName": "Feryx",
-    "icon": "src/images/feryx_logo_v2",
-    "icons": {
-      "icon": "src/images/icons/icon.png",
-      "icons": {
-        "linux": ["src/images/icons/feryx_logo_v3.png"],
-        "win": ["src/images/icons/feryx_logo_v3.ico"],
-        "mac": ["src/images/icons/feryx_logo_v2.icns"]
-      }
+    "appId": "feryx",
+    "productName": "Feryx GPX Tracker",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/images/icons/feryx_logo_v3.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "src/images/icons/feryx_logo_v3.ico",
+      "uninstallerIcon": "src/images/icons/feryx_logo_v3.ico",
+      "uninstallDisplayName": "Uninstall Feryx",
+      "license": "LICENSE.md"
     }
   },
   "keywords": [],
   "author": "Linus",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "type": "commonjs",
   "description": "A gpx tracker app",
   "devDependencies": {
@@ -34,7 +45,8 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
     "@electron-forge/plugin-fuses": "^7.6.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "33.3.1"
+    "electron": "33.3.1",
+    "electron-builder": "^25.1.8"
   },
   "dependencies": {
     "@mapbox/togeojson": "^0.16.2",

@@ -7,11 +7,12 @@ const sqlite3 = require('sqlite3').verbose();
 let mainWindow;
 
 // Connect to the SQLite database
-const db = new sqlite3.Database('./database.db', (err) => {
+const dbPath = path.join(app.getPath('userData'), 'database.db');
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('Error connecting to the database:', err);
+    console.error('Error connecting to the SQlite database at:', err);
   } else {
-    console.log('Connected to the SQLite database.');
+    console.log('Connected to SQLite database at', dbPath);
     // Create the users table if it doesn't exist :P
     db.run(
       `CREATE TABLE IF NOT EXISTS users (
@@ -32,7 +33,7 @@ app.on('ready', () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'), // Preload script
       contextIsolation: true,
-      nodeIntegration: false,
+      nodeIntegration: true,
       enableRemoteModule: false,
     },
   });
@@ -74,6 +75,13 @@ ipcMain.handle('login', async (_, username, password) => {
 
 // Dialog requests
 ipcMain.handle('show-dialog', async (_, { type, title, message }) => {
+  console.log('show-dialog event triggered:', { type, title, message });
+
+  if (!mainWindow) {
+    console.error('No mainWindow found!');
+    return;
+  }
+
   return dialog.showMessageBox(mainWindow, {
     type: type || 'info',
     title: title || 'Message',

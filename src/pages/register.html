@@ -39,7 +39,8 @@
       }
   
       const response = await window.api.register(username, password);
-  
+      console.log("Register response:", response);
+      
       if (response.success) {
         await window.api.showDialog({
           type: 'info',
